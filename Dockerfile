@@ -66,3 +66,4 @@ RUN ./boot.source \
 FROM bootstrap-ghc AS test-ghc
 
 RUN hadrian/build test -j10 --flavour=$FLAVOUR --config="config.timeout=7200" --docs=none
+RUN hadrian/build test -j10 --flavour=$FLAVOUR --config="config.timeout=7200" --docs=none -k || true
