@@ -28,6 +28,11 @@ RUN case "$(uname -m)" in \
     xz \
     zlib-dev
 
+# Configure coredumps
+RUN apk add --no-cache gdb coreutils && \
+    echo "kernel.core_pattern=/coredump/core-%e.%p.%t" >> /etc/sysctl.conf && \
+    mkdir -p /coredump && chmod 777 /coredump
+
 FROM bootstrap AS bootstrap-ghc
 
 ARG GHC_VERSION_BUILD
